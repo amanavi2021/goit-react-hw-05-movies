@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, Suspense } from 'react';
-import {useParams, Link, NavLink, Outlet, useLocation} from 'react-router-dom';
+import {useParams, Outlet, useLocation} from 'react-router-dom';
 import { getYear } from 'date-fns';
 import { IoArrowBackCircleSharp } from 'react-icons/io5';
 import moviesApiService from 'services/movies-api';
@@ -46,7 +46,7 @@ const MovieDetails = () => {
         <BackLink to={backLink.current}>
         <IoArrowBackCircleSharp style={{ marginRight: 8, width: '20', height: '20' }}/>
           Go back</BackLink>
-        {movie.length===0 ? <p>There are no such movie</p>
+        {movie.length===0 || error ? <p>There are no such movie</p>
         : <div>
         <MovieCard>
         <MovieImage src={poster_path ?

@@ -16,7 +16,7 @@ const Cast = () => {
     async function getCast() {
       try {
         const credits = await moviesApiService.fetchCast(id);
-        // console.log('cast', credits);
+      
         if (credits.cast.length !== 0) {
           setCast(credits.cast);
           setError('');

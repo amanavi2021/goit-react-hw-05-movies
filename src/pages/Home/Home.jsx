@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import  { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getYear } from 'date-fns';
 import moviesApiService from 'services/movies-api';
 
@@ -12,12 +12,9 @@ const Home = () => {
     async function getTrandingMovies() {
       try {
         const movies = await moviesApiService.fetchTrandingMovies();
-        // console.log(movies);
         setTrandingMovies(movies.results);
         setError('');
 
-        // setTrandingMovies([]);
-        // setError("🦄 Unfortunately there are no such images");
       } catch (error) {
         setTrandingMovies([]);
         setError(error);
@@ -29,13 +26,19 @@ const Home = () => {
   return (
     <div>
       <h1>Trending today</h1>
-      <ul>
-        {trandingMovies.map(({id, title, release_date}) => 
+      {error ? (
+        <p>{error}</p>
+      ) : (
+        <ul>
+          {trandingMovies.map(({ id, title, release_date }) => (
             <li key={id}>
-                <Link to={`movies/${id}`} state={{from: location}}>{title} ({getYear(new Date(release_date))})</Link>
+              <Link to={`movies/${id}`} state={{ from: location }}>
+                {title} ({getYear(new Date(release_date))})
+              </Link>
             </li>
-        )}
-</ul>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
