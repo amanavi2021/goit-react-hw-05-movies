@@ -31,7 +31,6 @@ async function fetchSearchingMovies (queryString) {
     
     };
 
-    // https://api.themoviedb.org/3/movie/333?language=en-US
 async function fetchMovie (id) {
     const searchParams = new URLSearchParams({
         api_key: API_KEY
@@ -51,7 +50,6 @@ async function fetchReviews (id) {
         page: 1
 
     });
-    // 'https://api.themoviedb.org/3/movie/44/reviews?language=en-US&page=1'
     const url=`${BASE_URL}movie/${id}/reviews?${searchParams}`;
     const response = await axios.get(url);
     const reviews = response.data;
